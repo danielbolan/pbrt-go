@@ -8,12 +8,12 @@ import (
 )
 
 func ParseScene() Scene {
-	c := Camera{}
-	c.PixelWidth = 100
-	c.AspectRatio = 1.0
-	c.FocalLength = 1.0
-	c.Position = Vec3{0, 0, -1}
-	c.Target = Vec3{0, 0, 0}
+	lookFrom := Vec3{0.5, 0, 0.2}
+	lookAt := Vec3{0, 0, 1}
+	up := Vec3{0, 1, 0}
+	fov := 60.0
+	aspectRatio := 1.0
+	c := NewCamera(lookFrom, lookAt, up, fov, aspectRatio)
 
 	p := AggregatePrimitive{}
 	sphere := SpherePrimitive{}

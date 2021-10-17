@@ -45,3 +45,10 @@ func (a Vec3) Len() float64 {
 func (a Vec3) Norm() Vec3 {
 	return a.Times(1 / a.Len())
 }
+
+func (u Vec3) Cross(v Vec3) Vec3 {
+	x := u.Y*v.Z - u.Z*v.Y
+	y := u.Z*v.X - u.X*v.Z
+	z := u.X*v.Y - u.Y*v.X
+	return Vec3{x, y, z}
+}
