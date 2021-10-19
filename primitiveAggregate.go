@@ -1,5 +1,7 @@
 package main
 
+import "math"
+
 type AggregatePrimitive struct {
 	Primitives []Primitive
 }
@@ -8,17 +10,19 @@ func (ap *AggregatePrimitive) Add(p Primitive) {
 	ap.Primitives = append(ap.Primitives, p)
 }
 
-func (ap AggregatePrimitive) Intersect(ray Ray) float64 {
-	t := -1.0
+func (ap AggregatePrimitive) Intersect(ray Ray) *SurfaceInteraction {
+	t := math.Inf(1)
+	var retval *SurfaceInteraction = nil
 	for _, p := range ap.Primitives {
-		it := p.Intersect(ray)
-		if it > 0 {
-			if it < t || t == -1 {
-				t = it
+		si := p.Intersect(ray)
+		if si != nil && si.T > 0 {
+			if si.T < t {
+				t = si.T
+				retval = si
 			}
 		}
 	}
-	return t
+	return retval
 }
 
 func (ap AggregatePrimitive) DoesIntersect(ray Ray) bool {

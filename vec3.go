@@ -1,6 +1,9 @@
 package main
 
-import "math"
+import (
+	"image/color"
+	"math"
+)
 
 type Vec3 struct {
 	X, Y, Z float64
@@ -51,4 +54,22 @@ func (u Vec3) Cross(v Vec3) Vec3 {
 	y := u.Z*v.X - u.X*v.Z
 	z := u.X*v.Y - u.Y*v.X
 	return Vec3{x, y, z}
+}
+
+// The Hadamard product does piecewise multiplication
+// Should be helpful when working with vectors representing colors
+func (u Vec3) Hadamard(v Vec3) Vec3 {
+	x := u.X * v.X
+	y := u.Y * v.Y
+	z := u.Z * v.Z
+	return Vec3{x, y, z}
+}
+
+func (u Vec3) ToRGBA() color.RGBA {
+	return color.RGBA{
+		uint8(u.X * 255.0),
+		uint8(u.Y * 255.0),
+		uint8(u.Z * 255.0),
+		255,
+	}
 }

@@ -8,10 +8,10 @@ import (
 )
 
 func ParseScene() Scene {
-	lookFrom := Vec3{0.5, 0, 0.2}
-	lookAt := Vec3{0, 0, 1}
+	lookFrom := Vec3{0.8, 0.7, 0.3}
+	lookAt := Vec3{0, 0, 1.1}
 	up := Vec3{0, 1, 0}
-	fov := 60.0
+	fov := 45.0
 	aspectRatio := 1.0
 	c := NewCamera(lookFrom, lookAt, up, fov, aspectRatio)
 
@@ -19,8 +19,10 @@ func ParseScene() Scene {
 	sphere := SpherePrimitive{}
 	sphere.Center = Vec3{-0.2, -0.2, 1}
 	sphere.Radius = 0.25
+	sphere.Color = Vec3{1.0, 0.3, 0.5}
 	p.Add(sphere)
 	sphere.Center = Vec3{0.2, 0.2, 1}
+	sphere.Color = Vec3{0.0, 0.6, 1.0}
 	p.Add(sphere)
 
 	s := Scene{}

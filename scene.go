@@ -19,8 +19,9 @@ func (s Scene) Render() image.Image {
 			u := float64(x) / float64(w)
 			v := float64(y) / float64(h)
 			ray := s.Camera.Ray(u, v)
-			if s.Aggregate.DoesIntersect(ray) {
-				img.Set(x, y, color.White)
+			si := s.Aggregate.Intersect(ray)
+			if si != nil {
+				img.Set(x, y, si.Color.ToRGBA())
 			} else {
 				img.Set(x, y, color.Black)
 			}
